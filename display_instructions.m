@@ -1,7 +1,8 @@
-function display_instructions(windowPtr,instruction_screen)
+function quit_to_tACS = display_instructions(windowPtr,instruction_screen)
 
 solid_black = imread('solid_black.png');
 solid_black_screen = Screen('MakeTexture',windowPtr,solid_black);
+quit_to_tACS = false;
 
 if (instruction_screen == 1)
     
@@ -66,9 +67,10 @@ elseif (instruction_screen == 5)
     
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+6000);
     
-    if (wait_2(8) == 1)
+    if (wait_2(46) == 1)
         
-        return
+        quit_to_tACS = true;
+        Screen('CloseAll')
         
     end
     

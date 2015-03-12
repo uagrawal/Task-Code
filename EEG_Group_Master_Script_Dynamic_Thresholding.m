@@ -1,5 +1,5 @@
 %EEG Group Master Script - Dynamic Thresholding
-
+  
 %This script will contain the following procedure:
 
 %Set up - 40 min
@@ -16,8 +16,8 @@
 %% Initializing Psychtoolbox functions
 %Initialize Psych Sound
 
-%SCREENS = 0; %if there is 1 screen then keep this
-SCREENS = 1; %if there are two screens then keep this
+SCREENS = 0; %if there is 1 screen then keep this
+%SCREENS = 1; %if there are two screens then keep this
 
 InitializePsychSound(1);
 SamplingFreq = 44100;
@@ -41,7 +41,8 @@ display_instructions(windowPtr,1);
 
 
 display_instructions(windowPtr,2);
-
+%Training Blocks
+%{
 while (not_understand_task_1)
     
     [output_array_training_1,error_1,subject_quit_training_1] = Training_Block_1(windowPtr);
@@ -92,6 +93,7 @@ end
 
 display_instructions(windowPtr,3.5);
 
+
 %% 2) Go into PEST Convergence Procedure
 
 [detection_threshold_1,output_array_PEST_1,subject_quit_PEST] = PEST_Convergence_Procedure(windowPtr);
@@ -112,8 +114,9 @@ while (detection_threshold_1 == 1)
     
 end
 
-%% 3) Tactile Detection Task
 
+
+%% 3) Tactile Detection Task
 [output_array_tactile_detection_1,subject_quit_task_1,new_threshold] = Dynamic_Thresholding(windowPtr,detection_threshold_1);
 
 save('psychometric_data_pre_tACS');
@@ -123,11 +126,15 @@ if (subject_quit_task_1)
         return
         
 end
-
+%}
 
 %% 4) tACS
-display_instructions(windowPtr,5);
-display_instructions(windowPtr,5);
+quit = display_instructions(windowPtr,5);
+if (quit)
+        
+        return
+        
+end
 
 
 %% 5) Tactile Detection Task

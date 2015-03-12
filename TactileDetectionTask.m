@@ -130,8 +130,8 @@ for (i = 1:num_intensities*num_trials)
         display_instructions(windowPtr,6)
         
     end
-    
-    if (keyCode(8) == 1)
+        %46 is equals
+    if (keyCode(46) == 1)
         
         subject_quit = true;
         fprintf('The subject indicated they wanted to quit at Tactile Detection Task.');

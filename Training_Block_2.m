@@ -26,7 +26,7 @@ num_trials = 5;
 %Initialize variables to store stimulus values
 num_intensities = 2;
 intensity_1 = 0;
-intensity_2 = .8; %whatever 350 um is
+intensity_2 = 1; %whatever 350 um is
 
 
 %array with num_trials of each stimulus (for a total of 3*num_trials trials)
@@ -66,7 +66,6 @@ for (i = 1:num_intensities*num_trials)
     
     %Draw red crosshair
     Screen('DrawTexture',windowPtr,red_cross_screen);
-    %red_cross_screen(windowPtr,'Flip')
     Screen(windowPtr,'Flip');
     
     WaitSecs(delay_time);
@@ -77,7 +76,6 @@ for (i = 1:num_intensities*num_trials)
     
     %Draw green crosshair
     Screen('DrawTexture',windowPtr,green_cross_screen);
-    %green_cross_screen(windowPtr,'Flip')
     Screen(windowPtr,'Flip');
     
     % Checks for detection, gives
@@ -97,7 +95,9 @@ for (i = 1:num_intensities*num_trials)
         
         error_count = error_count + 1;
         
-    elseif (keyCode(8) == 1)
+    end
+        %46 is =
+    if (keyCode(46) == 1)
         
         subject_quit = true;
         fprintf('The subject indicated they wanted to quit at Training Block 2.');

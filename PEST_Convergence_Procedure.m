@@ -48,7 +48,7 @@ mid = max/2;
 min = 0;
 
 %Initialize variable to detect 5 um difference
-delta_threshold = .01; % the equivalent of 5 um
+delta_threshold = .02; % the equivalent of 5 um
 
 %Initialize boolean for while loop
 threshold_not_reached = true;
@@ -100,9 +100,9 @@ while (threshold_not_reached)
     WaitSecs(2 - delay_time_1)
     
     %Draw green crosshair
+    [s_max, keyCode_max, delta_max] = KbWait([], 2, GetSecs()+1);
     Screen('DrawTexture',windowPtr,green_cross_screen);
     Screen(windowPtr,'Flip');
-    [s_max, keyCode_max, delta_max] = KbWait([], 2, GetSecs()+1);
     
     WaitSecs(1 - delta_max);
     
@@ -124,9 +124,9 @@ while (threshold_not_reached)
     WaitSecs(2 - delay_time_2)
     
     %Draw green crosshair
+    [s_mid, keyCode_mid, delta_mid] = KbWait([], 2, GetSecs()+1);
     Screen('DrawTexture',windowPtr,green_cross_screen);
     Screen(windowPtr,'Flip');
-    [s_mid, keyCode_mid, delta_mid] = KbWait([], 2, GetSecs()+1);
     
     WaitSecs(1 - delta_mid);
     
@@ -185,9 +185,9 @@ while (threshold_not_reached)
             end
             
             repeat_num = repeat_num + 1;
-            max = max + .1;
-            mid = mid + .1;
-            min = min + .1;
+            max = max*1.2;
+            mid = mid*1.2;
+            min = min*1.2;
             
             
         
@@ -215,7 +215,7 @@ while (threshold_not_reached)
     
     end
     
-    if (keyCode_max(8) == 1 || keyCode_mid(8) == 1 || keyCode_min(8) == 1)
+    if (keyCode_max(46) == 1 || keyCode_mid(46) == 1 || keyCode_min(46) == 1)
         
         subject_quit = true;
         fprintf('The subject indicated they wanted to quit during PEST.');

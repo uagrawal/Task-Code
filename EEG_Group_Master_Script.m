@@ -16,8 +16,8 @@
 %% Initializing Psychtoolbox functions
 %Initialize Psych Sound
 
-%SCREENS = 0; %if there is 1 screen then keep this
-SCREENS = 1; %if there are two screens then keep this
+SCREENS = 0; %if there is 1 screen then keep this
+%SCREENS = 1; %if there are two screens then keep this
 
 InitializePsychSound(1);
 SamplingFreq = 44100;
@@ -126,8 +126,12 @@ end
 
 
 %% 4) tACS
-display_instructions(windowPtr,5);
-display_instructions(windowPtr,5);
+quit = display_instructions(windowPtr,5);
+if (quit)
+        
+        return
+        
+end
 
 
 %% 5) Tactile Detection Task
