@@ -149,6 +149,8 @@ if (subject_quit_task_2)
         
 end
 
+[detection_threshold_PEST_2,output_array_PEST_2,subject_quit_PEST] = PEST_Convergence_Procedure(windowPtr);
+
 display_instructions(windowPtr,7);
 
 Screen('CloseAll')

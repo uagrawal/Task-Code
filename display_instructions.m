@@ -65,6 +65,8 @@ elseif (instruction_screen == 5)
     Screen('DrawTexture',windowPtr,instructions_screen_5);
     Screen(windowPtr, 'Flip');
     
+    fprintf('Subject is ready to be tACSed.');
+    
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+6000);
     
     if (wait_2(46) == 1)
@@ -98,6 +100,8 @@ elseif (instruction_screen == 7)
     
     Screen('DrawTexture',windowPtr,instructions_screen_end);
     Screen(windowPtr, 'Flip');
+    
+    fprintf('The subject has completed the experiment.');
     
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+6000);
     
