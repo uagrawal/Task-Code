@@ -16,8 +16,8 @@
 %% Initializing Psychtoolbox functions
 %Initialize Psych Sound
 
-SCREENS = 0; %if there is 1 screen then keep this
-%SCREENS = 1; %if there are two screens then keep this
+setGlobalVariables();
+global screens
 
 InitializePsychSound(1);
 SamplingFreq = 44100;
@@ -28,7 +28,7 @@ SoundHandle = PsychPortAudio('Open',[],[],2,SamplingFreq,NbChannels);
 Screen('Preference','SyncTestSettings',[.005],[50],[.5],[5]);
 
 %Open first screen, solid black
-[windowPtr, rect] = Screen('OpenWindow',SCREENS,[0 0 0]);
+[windowPtr, rect] = Screen('OpenWindow',screens,[0 0 0]);
 
 %% Round 1 -
 
@@ -42,7 +42,7 @@ display_instructions(windowPtr,1);
 
 display_instructions(windowPtr,2);
 %Training Blocks
-%{
+
 while (not_understand_task_1)
     
     [output_array_training_1,error_1,subject_quit_training_1] = Training_Block_1(windowPtr);
