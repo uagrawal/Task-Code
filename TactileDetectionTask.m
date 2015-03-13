@@ -35,7 +35,7 @@ threshold, and null trials). Each block will consist of 144 trials lasting
 
 %}
 
-
+global initial_time
 subject_quit = false;
 %Initialize crosshair images and screens
 green_cross = imread('crosshair_green.png');
@@ -105,21 +105,22 @@ for (i = 1:num_intensities*num_trials)
     WaitSecs(delay_time);
     
     %Deliver Stimulus
+    time = GetSecs() - initial_time;
     Beeper(100,stimulus,.01);
-    WaitSecs(2 - delay_time);
+    WaitSecs(2 - delay_time - .01)
     
     %Draw green crosshair
     Screen('DrawTexture',windowPtr,green_cross_screen);
     Screen(windowPtr,'Flip');
     
     % Checks for detection, gives 
-    [s, keyCode, delta] = KbWait([], 2, GetSecs()+1);
+    [s, keyCode, delta] = KbWait(-3, 2, GetSecs()+1);
     
     WaitSecs(1 - delta);
     
     %Output data appropriately
     count = count + 1;
-    data = [count, delay_time, stimulus, keyCode(30)];
+    data = [count, time, delay_time, stimulus, keyCode(30)];
     
     output_array = cat(1,output_array,data);
     %Output data

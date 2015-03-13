@@ -16,7 +16,7 @@ threshold will increase by .005 V.
 
 %% 1) Initialise Screens and other necessary variables
 
-
+global initial_time
 % NUM TRIALS - desired number of total trials
 total_num_trials = 400;
 
@@ -53,7 +53,7 @@ threshold_output_array = []; %array that only stores responses from threshold st
 count_threshold = 0; %number of threshold stimuli
 
 %The equivalent of .005 V (to increase or decrease the threshold by)
-change = .02;
+change = .01;
 
 %value to store the changing threshold
 threshold = threshold_intensity;
@@ -106,15 +106,16 @@ for (i = 1:total_num_trials)
     WaitSecs(delay_time);
     
     %Deliver Stimulus
+    time = GetSecs() - initial_time;
     Beeper(100,stimulus,.01);
-    WaitSecs(2 - delay_time);
+    WaitSecs(2 - delay_time - .01);
     
     %Draw green crosshair
     Screen('DrawTexture',windowPtr,green_cross_screen);
     Screen(windowPtr,'Flip');
     
     % Checks for detection, gives
-    [s, keyCode, delta] = KbWait([], 2, GetSecs()+1);
+    [s, keyCode, delta] = KbWait(-3, 2, GetSecs()+1);
     
     WaitSecs(1 - delta);
     
@@ -181,7 +182,7 @@ for (i = 1:total_num_trials)
     end
     
     %Output data appropriately
-    data = [i, delay_time, stimulus, keyCode(30)];
+    data = [i, time, delay_time, stimulus, keyCode(30)];
     
     output_array = cat(1,output_array,data);
     %Output data

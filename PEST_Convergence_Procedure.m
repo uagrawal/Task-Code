@@ -21,7 +21,7 @@ trials is 5 um. This process will take 3 minutes.
 
 %}
 
-
+global initial_time
 %% 1) Setting up Psych Toolbox Audio and Visual
 
 subject_quit = false;
@@ -95,9 +95,10 @@ while (threshold_not_reached)
     WaitSecs(delay_time_1);
     
     %Max stimulus
+    time_1 = GetSecs() - initial_time;
     Beeper(100,max,.01);
     
-    WaitSecs(2 - delay_time_1)
+    WaitSecs(2 - delay_time_1 - .01)
     
     %Draw green crosshair
     Screen('DrawTexture',windowPtr,green_cross_screen);
@@ -118,9 +119,10 @@ while (threshold_not_reached)
     WaitSecs(delay_time_2);
     
     %Mid stimulus
+    time_2 = GetSecs() - initial_time;
     Beeper(100,mid,.01);
     
-    WaitSecs(2 - delay_time_2)
+    WaitSecs(2 - delay_time_2 - .01)
     
     %Draw green crosshair
     Screen('DrawTexture',windowPtr,green_cross_screen);
@@ -140,10 +142,11 @@ while (threshold_not_reached)
     WaitSecs(delay_time_3);
     
     %Min stimulus
+    time_3 = GetSecs() - initial_time;
     Beeper(100,min,.01);
     
     
-    WaitSecs(2 - delay_time_3)
+    WaitSecs(2 - delay_time_3 - .01)
     
     %Draw green crosshair
     Screen('DrawTexture',windowPtr,green_cross_screen);
@@ -160,9 +163,9 @@ while (threshold_not_reached)
     %Store trial information in array to output
     count = count + 3;
     
-    max_data = [(count - 2), delay_time_1, max, max_detected];
-    mid_data = [(count - 1), delay_time_2, mid, mid_detected];
-    min_data = [(count), delay_time_3, min, min_detected];
+    max_data = [(count - 2), time_1, delay_time_1, max, max_detected];
+    mid_data = [(count - 1), time_2, delay_time_2, mid, mid_detected];
+    min_data = [(count), time_3, delay_time_3, min, min_detected];
     
     output_array = cat(1,output_array,max_data,mid_data,min_data);
     %Output each trial's results

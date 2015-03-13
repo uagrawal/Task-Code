@@ -5,7 +5,7 @@ so there is a total of 1s more of the red cross. Also add 1 more second for
 response - so each trial is 2 seconds longer.
 
 %}
-
+global initial_time
 subject_quit = false;
 
 %Initialize crosshair images and screens
@@ -76,10 +76,11 @@ for (i = 1:num_intensities*num_trials)
     WaitSecs(delay_time + .5);
     
     %Deliver Stimulus
+    time = GetSecs() - initial_time;
     Beeper(100,stimulus,.01);
     
     %ADDED .5s
-    WaitSecs(2.5 - delay_time);
+    WaitSecs(2.5 - delay_time - .01);
     
     %Draw green crosshair
     Screen('DrawTexture',windowPtr,green_cross_screen);
@@ -87,14 +88,14 @@ for (i = 1:num_intensities*num_trials)
     Screen(windowPtr,'Flip');
     
     % Checks for detection, gives
-    [s, keyCode, delta] = KbWait([], 2, GetSecs()+1);
+    [s, keyCode, delta] = KbWait(-3, 2, GetSecs()+2);
     
     % ADDED .5s
     WaitSecs(2 - delta);
     
     %Output data appropriately
     count = count + 1;
-    data = [count, delay_time, stimulus, keyCode(30)];
+    data = [count, time, delay_time, stimulus, keyCode(30)];
     
     if (stimulus == intensity_1 && keyCode(30) == 1)
         

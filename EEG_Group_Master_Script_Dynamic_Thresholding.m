@@ -19,6 +19,7 @@
 setGlobalVariables();
 global screens
 
+
 InitializePsychSound(1);
 SamplingFreq = 44100;
 NbChannels = 2;
