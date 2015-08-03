@@ -19,7 +19,7 @@ elseif (strcmp(instruction_screen,'PreTrainingBlock1A'))
     Screen(windowPtr,'Flip');
     
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
-
+    
 elseif (strcmp(instruction_screen,'PreTrainingBlock1B'))
     
     instructions = imread('Instructions_PreTrainingBlock1B.png');
