@@ -14,15 +14,17 @@ threshold will increase by .005 V.
 
 %}
 
-%% 1) Initialise Screens and other necessary variables
+%% 1) Initialize variables
 
 global initial_time
-% NUM TRIALS - desired number of total trials
-total_num_trials = 400;
 
+% desired number of total trials
+total_num_trials = 600;
 
-%iniitalize variables, images, and screens
+% boolean to track whether subject quit
 subject_quit = false;
+
+% initialize images, screens
 green_cross = imread('crosshair_green.png');
 red_cross = imread('crosshair_red.png');
 solid_black = imread('solid_black.png');
@@ -31,31 +33,31 @@ red_cross_screen = Screen('MakeTexture',windowPtr,red_cross);
 solid_black_screen = Screen('MakeTexture',windowPtr,solid_black);
 
 
-%Draw Black Screen to Start
+% draw initial black screen
 Screen('DrawTexture',windowPtr,solid_black_screen);
 Screen(windowPtr,'Flip');
 
-%Initialize stimulus intensities
+% initial stimulus intensities (based on performance in PEST)
 null = 0.0;
 threshold_intensity = detection_threshold;
 supra = detection_threshold*2;
 
-%Array to store placeholders (0,1,2) for (null, threshold, supra) at the
-%correct proportions (ie .2, .7, .1)
+% array to store placeholders (0,1,2) for (null, threshold, supra) at the
+% correct proportions (ie 20%, 70%, 10%)
 stimulus_initial_values = [repmat(0,1,round(total_num_trials*.2)),repmat(1,1,round(total_num_trials*.7)),repmat(2,1,round(total_num_trials*.1))];
 
-%Array with possible delay times
+% array with possible delay times
 delay_times = [.5 .6 .7 .8 .9 1 1.1 1.2 1.3 1.4 1.5];
 
-%Initializing variables to keep track of output
+% variables to keep track of output
 output_array = []; %overall output
 threshold_output_array = []; %array that only stores responses from threshold stimuli
 count_threshold = 0; %number of threshold stimuli
 
-%The equivalent of .005 V (to increase or decrease the threshold by)
+% the equivalent of .005 V (to increase or decrease the threshold by)
 change = .01;
 
-%value to store the changing threshold
+% value to store the changing threshold
 threshold = threshold_intensity;
 
 %% 4) Actual presentation of stimuli and input of participant response
@@ -107,7 +109,7 @@ for (i = 1:total_num_trials)
     
     %Deliver Stimulus
     time = GetSecs() - initial_time;
-    Beeper(100,stimulus,.01);
+    Beeper(100, stimulus, .01);
     WaitSecs(2 - delay_time - .01);
     
     %Draw green crosshair
@@ -144,8 +146,8 @@ for (i = 1:total_num_trials)
                 end
             end
             
-            % If it wasn't detected, and previous two threshold stimuli weren't
-            % detected, then increase threshold
+        % If it wasn't detected, and previous two threshold stimuli weren't
+        % detected, then increase threshold
         else
             
             if (count_threshold > 2)
@@ -161,7 +163,7 @@ for (i = 1:total_num_trials)
         end  
     end
     
-    %% Output Array and breaks
+    %% output array and breaks
     
     % Add a break every third of the task
     if (i == round(total_num_trials/3) || i == 2*round(total_num_trials/3))
@@ -174,7 +176,7 @@ for (i = 1:total_num_trials)
     if (keyCode(46) == 1)
         
         subject_quit = true;
-        fprintf('The subject indicated they wanted to quit at Dynamic Thresholding.');
+        fprintf('The subject indicated they wanted to quit.');
         Screen('CloseAll')
         break;
         
@@ -185,9 +187,8 @@ for (i = 1:total_num_trials)
     data = [i, time, delay_time, stimulus, keyCode(30)];
     
     output_array = cat(1,output_array,data);
+    
     %Output data
     output_array(end,:)
     
 end
-
-

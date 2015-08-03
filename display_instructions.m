@@ -1,61 +1,87 @@
 function quit_to_tACS = display_instructions(windowPtr,instruction_screen)
 
-solid_black = imread('solid_black.png');
-solid_black_screen = Screen('MakeTexture',windowPtr,solid_black);
-quit_to_tACS = false;
+if (strcmp(instruction_screen,'PreS1Localization'))
+    
+    instructions = imread('Instructions_PreS1Localization.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    
+elseif (strcmp(instruction_screen,'PreTrainingBlock1A'))
+    
+    instructions = imread('Instructions_PreTrainingBlock1A.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
 
-if (instruction_screen == 1)
+elseif (strcmp(instruction_screen,'PreTrainingBlock1B'))
     
-    instructions_1 = imread('tACS_Instructions_1.png');
-    instructions_screen_1 = Screen('MakeTexture',windowPtr,instructions_1);
+    instructions = imread('Instructions_PreTrainingBlock1B.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
     
-    Screen('DrawTexture',windowPtr,instructions_screen_1);
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    
+elseif (strcmp(instruction_screen,'PreTrainingBlock2'))
+    
+    instructions = imread('Instructions_PreTrainingBlock2.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    
+elseif (strcmp(instruction_screen,'PreCleanEEG1'))
+    
+    instructions = imread('Instructions_PreCleanEEG1.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    
+elseif (strcmp(instruction_screen,'PreTask'))
+    
+    instructions = imread('Instructions_PreTask.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    
+elseif (strcmp(instruction_screen,'PreCleanEEG2'))
+    
+    instructions = imread('Instructions_PreCleanEEG2.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
     
     
-elseif (instruction_screen == 2)
+elseif (strcmp(instruction_screen,'Final'))
     
-    instructions_2 = imread('tACS_Instructions_2.png');
-    instructions_screen_2 = Screen('MakeTexture',windowPtr,instructions_2);
+    instructions = imread('Instructions_Final.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
     
-    Screen('DrawTexture',windowPtr,instructions_screen_2);
+    Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
     
-elseif (instruction_screen == 3)
-    
-    
-    instructions_3 = imread('tACS_Instructions_3.png');
-    instructions_screen_3 = Screen('MakeTexture',windowPtr,instructions_3);
-    
-    Screen('DrawTexture',windowPtr,instructions_screen_3);
-    Screen(windowPtr,'Flip');
-    
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
-    
-elseif (instruction_screen == 3.5)
-    
-    
-    instructions_3a = imread('tACS_Instructions_3.5.png');
-    instructions_screen_3a = Screen('MakeTexture',windowPtr,instructions_3a);
-    
-    Screen('DrawTexture',windowPtr,instructions_screen_3a);
-    Screen(windowPtr,'Flip');
-    
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
-    
-elseif (instruction_screen == 4)
-    
-    instructions_4 = imread('tACS_Instructions_4.png');
-    instructions_screen_4 = Screen('MakeTexture',windowPtr,instructions_4);
-    
-    Screen('DrawTexture',windowPtr,instructions_screen_4);
-    Screen(windowPtr,'Flip');
-    
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+
     
 elseif (instruction_screen == 5)
     
@@ -106,8 +132,6 @@ elseif (instruction_screen == 7)
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+6000);
     
 end
-
-%Screen('CloseAll')
 
 
 end

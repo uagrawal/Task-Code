@@ -43,7 +43,7 @@ WaitSecs(3);
 
 %% 4) Initialize variables for tactile detection threshold and random delay times
 %Initialize variables to store stimulus values
-max = .9; %the equivalent of 350 um
+max = 1; %the equivalent of 350 um
 mid = max/2;
 min = 0;
 
@@ -224,8 +224,5 @@ while (threshold_not_reached)
     
         
     end
-    
-    
-    %Screen('CloseAll')
     
 end

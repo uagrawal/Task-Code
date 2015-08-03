@@ -5,7 +5,7 @@
 %Set up - 40 min
 % 1) Display Instructions - 2 min
 % 2) PEST - 3 min
-% 3) Tacti11leDetection Task - 20 min
+% 3) Tacti1leDetection Task - 20 min
 % 4) tACS - 10 min
 % 5) TactileDetection Task - 20 min
 % 6) PEST - 3 min
