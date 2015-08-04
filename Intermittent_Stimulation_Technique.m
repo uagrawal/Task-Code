@@ -4,16 +4,18 @@
 
 % Set up - 45 min
 % 1) S1 Localization - 1 min
-% 2) Testing Block 1 - 1 min
-% 3) Testing Block 2 - 1 min
-% 4) clean EEG 1 - 3 min
+% 2) Training Block 1 - 1 min
+% 3) Training Block 2 - 1 min
+% 4) Baseline EEG only - 3 min
 % 5) PEST Convergence - 3 min
-% 6) tACS/tactile 1 - 6 min
-% 7) EEG/tactile 1 - 6 min
-% 8) tACS/tactile 2 - 6 min
-% 9) EEG/tactile 2 - 6 min
-% 10) tACS/tactile 3 - 6 min
-% 11) clean EEG 2 - 3 min
+% 6) EEG/tactile 1 - 6 min
+% 7) tACS/tactile 1 - 6 min
+% 8) EEG/tactile 2 - 6 min
+% 9) tACS/tactile 2 - 6 min
+% 10) EEG/tactile 3 - 6 min
+% 11) tACS/tactile 3 - 6 min
+% 12) EEG/tactile 4 - 6 min
+% 13) Baseline EEG only - 3 min
 % Clean up - 30 min
 % 
 
@@ -49,7 +51,7 @@ Screen('Preference','SyncTestSettings',[.005],[50],[.5],[5]);
 display_instructions(windowPtr,'PreS1Localization')
 subject_quit_S1_Localization = S1_Localization(windowPtr);
 
-%% 3,4) Training Blocks 1 and 2
+%% 2,3) Training Blocks 1 and 2
 
 % Instructions for the task will be displayed until the participant reads
 % and understands them, and can press any key to move past. Training Blocks
@@ -122,13 +124,14 @@ while (not_understand_task_2)
     
 end
 
-%% 5) Clean EEG 1
+%% 4) Clean EEG 1
 
 % 3 minute period where instruction screen is displayed and clean EEG is
 % recorded
 display_instructions(windowPtr,'PreCleanEEG1')
 clean_eeg(windowPtr,180)
-%% 6) Go into PEST Convergence Procedure
+
+%% 5) Go into PEST Convergence Procedure
 
 display_instructions(windowPtr,'PreTask')
 % A procedure to obtain the tactile detection threshold (50 %)
@@ -143,21 +146,22 @@ while (detection_threshold == 1)
     [detection_threshold,output_array_PEST_1] = PEST_Convergence_Procedure(windowPtr);
     
 end
+%% 6 - 12) Tactile Stimulation Task
 
-%% 7-11) Tactile Stimulation Task
-
+% 6) EEG/tactile 1 - 6 min
 % 7) tACS/tactile 1 - 6 min
-% 8) EEG/tactile 1 - 6 min
+% 8) EEG/tactile 2 - 6 min
 % 9) tACS/tactile 2 - 6 min
-% 10) EEG/tactile 2 - 6 min
+% 10) EEG/tactile 3 - 6 min
 % 11) tACS/tactile 3 - 6 min
+% 12) EEG/tactile 4 - 6 min
 
-[output_array_tactile_detection, subject_quit_task, new_threshold] = Dynamic_Thresholding(windowPtr,detection_threshold);
+[output_array_tactile_detection, subject_quit_task, new_threshold] = Dynamic_Thresholding(windowPtr,detection_threshold,840);
 
 save('psychometric_data');
 
 
-%% 12) Clean EEG 2
+%% 13) Clean EEG 2
 
 % 3 minute period where instruction screen is displayed and clean EEG is
 % recorded

@@ -1,4 +1,4 @@
-function [output_array,subject_quit,threshold] = Dynamic_Thresholding(windowPtr,detection_threshold)
+function [output_array,subject_quit,threshold] = Dynamic_Thresholding(windowPtr,detection_threshold,total_num_trials)
 %{
 
 This is a script to perform the dynamic thresholding procedure as described
@@ -17,9 +17,6 @@ threshold will increase by .005 V.
 %% 1) Initialize variables
 
 global initial_time
-
-% desired number of total trials
-total_num_trials = 600;
 
 % boolean to track whether subject quit
 subject_quit = false;
