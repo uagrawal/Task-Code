@@ -36,6 +36,9 @@ NbChannels = 2;
 % Creates a sound handle with indicated settings
 SoundHandle = PsychPortAudio('Open',[],[],2,SamplingFreq,NbChannels);
 
+% Create Arduino handle
+a = arduino();
+
 % Initialize parameters of Screen() so Screen() doesn't crash
 % Note: This was specific to my Mac and runs on most Macs, but may need to
 % be altered on other laptops
@@ -156,7 +159,7 @@ end
 % 11) tACS/tactile 3 - 6 min
 % 12) EEG/tactile 4 - 6 min
 
-[output_array_tactile_detection, subject_quit_task, new_threshold] = Dynamic_Thresholding(windowPtr,detection_threshold,840);
+[output_array_tactile_detection, subject_quit_task, new_threshold] = Dynamic_Thresholding(windowPtr,detection_threshold,840,a);
 
 save('psychometric_data');
 
@@ -168,4 +171,5 @@ save('psychometric_data');
 display_instructions(windowPtr,'PreCleanEEG2')
 clean_eeg(windowPtr,180)
 display_instructions(windowPtr,'Final')
+clear a
 Screen('CloseAll')

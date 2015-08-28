@@ -1,4 +1,4 @@
-function [output_array,subject_quit,threshold] = Dynamic_Thresholding(windowPtr,detection_threshold,total_num_trials)
+function [output_array,subject_quit,threshold] = Dynamic_Thresholding(windowPtr,detection_threshold,total_num_trials,a)
 %{
 
 This is a script to perform the dynamic thresholding procedure as described
@@ -11,6 +11,8 @@ Dynamic thresholding works as follows - if two correct threshold stimuli
 are percieved in a row, then the threshold will be lowered by .005 V. If
 three threshold stimuli are failed to be percieved in a row, then the
 threshold will increase by .005 V.
+
+a = arduino
 
 %}
 
@@ -162,13 +164,22 @@ for (i = 1:total_num_trials)
     
     %% output array and breaks
     
-    % Add a break every third of the task
-    if (i == round(total_num_trials/3) || i == 2*round(total_num_trials/3))
+    % Add a break every 240 trials (and turn tACS off)
+    % Stimulate at the defined trial times below
+    if (i == 121 || i == 361 || i == 601)
         
+        writeDigitalPin(a, 11, 1)
+        
+    end
+    
+    if (mod(i,240) == 0)
+        
+        writeDigitalPin(a,11,0)
         display_instructions(windowPtr,6)
         
     end
     
+
     %Check for quitting (= is to quit)
     if (keyCode(46) == 1)
         
