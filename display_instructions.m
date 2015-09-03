@@ -81,6 +81,24 @@ elseif (strcmp(instruction_screen,'Final'))
     
     [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
     
+elseif (strcmp(instruction_screen,'Break'))
+    
+    instructions = imread('Instructions_BreakA.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+50);
+    
+    instructions = imread('Instructions_BreakB.png');
+    instructions_screen = Screen('MakeTexture',windowPtr,instructions);
+    
+    Screen('DrawTexture',windowPtr,instructions_screen);
+    Screen(windowPtr,'Flip');
+    
+    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+10);
+    
     
 end
 

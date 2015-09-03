@@ -27,8 +27,8 @@ WaitSecs(3);
 stim_frequency = 100; % Hz
 stim_intensity = 1; % on scale of 0 - 1 (scaled in psychtoolbox)
 stim_duration = .01; % seconds
-num_trials = 50;
-freq_trials = 1; % seconds
+num_trials = 100;
+freq_trials = .5; % seconds
 
 %% 2) Actual presentation of stimuli
 

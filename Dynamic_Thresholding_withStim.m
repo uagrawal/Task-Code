@@ -1,4 +1,4 @@
-function [output_array,subject_quit,threshold] = Dynamic_Thresholding(windowPtr,detection_threshold,total_num_trials)
+function [output_array,subject_quit,threshold] = Dynamic_Thresholding_withStim(windowPtr,detection_threshold,total_num_trials,a)
 %{
 
 This is a script to perform the dynamic thresholding procedure as described
@@ -12,6 +12,7 @@ are percieved in a row, then the threshold will be lowered by .005 V. If
 three threshold stimuli are failed to be percieved in a row, then the
 threshold will increase by .005 V.
 
+a = arduino
 
 %}
 
@@ -161,10 +162,24 @@ for (i = 1:total_num_trials)
         end  
     end
     
+    %% Stimulation
+    
+    % Stimulate every 2 trials
+    if (mod(i+2,4) == 0)
+        
+        writeDigitalPin(a, 11, 1)
+        
+    elseif (mod(i,4) == 0)
+        
+        writeDigitalPin(a, 11, 0)
+    
+    end
+    
 
     %Check for quitting (= is to quit)
     if (keyCode(46) == 1)
         
+        writeDigitalPin(a, 11, 0)
         subject_quit = true;
         fprintf('The subject indicated they wanted to quit.');
         Screen('CloseAll')
