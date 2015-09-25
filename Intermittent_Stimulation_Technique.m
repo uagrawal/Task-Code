@@ -1,5 +1,5 @@
 %Intermittent Stimulation Technique
-  
+
 %This script contains the following procedure:
 
 %{
@@ -49,7 +49,9 @@ Screen('Preference','SyncTestSettings',[.005],[50],[.5],[5]);
 display_instructions(windowPtr,'PreS1Localization')
 subject_quit_S1_Localization = S1_Localization(windowPtr);
 
-%% 2) Training Blocks 1 and 2
+
+
+%% 2) Training Block 1
 
 % Instructions for the task will be displayed until the participant reads
 % and understands them, and can press any key to move past. A Training Block
@@ -99,10 +101,12 @@ end
 % 3 minute period where instruction screen is displayed and clean EEG is
 % recorded
 display_instructions(windowPtr,'PreCleanEEG1')
+Beeper(50, 1, 1);
 clean_eeg(windowPtr,180)
 
-%% 4) Go into PEST Convergence Procedure
 
+%% 4) Go into PEST Convergence Procedure
+Beeper(50, 1, 1);
 display_instructions(windowPtr,'PreTask')
 % A procedure to obtain the tactile detection threshold (50 %)
 [detection_threshold, output_array_PEST_1, subject_quit_PEST] = PEST_Convergence_Procedure(windowPtr);
@@ -117,22 +121,23 @@ while (detection_threshold == 1)
     
 end
 %% 5) Baseline EEG/Tactile 1 - 7.5 min
-
+Beeper(50, 1, 1);
 [tactile_detection_baseline_pretACS, subject_quit_task, new_threshold_pretACS] = Dynamic_Thresholding(windowPtr,detection_threshold,150);
 
 save('baseline_data')
+
 %% 6) tACS/Tactile/EEG - 15 min
 
 display_instructions(windowPtr,'Break')
-
-[tactile_detection_tACS, subject_quit_task, new_threshold_tACS] = Dynamic_Thresholding_withStim(windowPtr,new_threshold_pretACS,300,a);
+Beeper(50, 1, 1);
+[tactile_detection_tACS, subject_quit_task, new_threshold_tACS] = Dynamic_Thresholding_withStim(windowPtr, new_threshold_pretACS,300,a);
 clear a
 save('post_tACS_data')
 
 %% 7) Baseline EEG/Tactile 2 - 7.5 min
 
 display_instructions(windowPtr,'Break')
-
+Beeper(50, 1, 1);
 [tactile_detection_baseline_posttACS, subject_quit_task, new_threshold_posttACS] = Dynamic_Thresholding(windowPtr,new_threshold_tACS,150);
 
 
@@ -141,6 +146,9 @@ display_instructions(windowPtr,'Break')
 % 3 minute period where instruction screen is displayed and clean EEG is
 % recorded
 display_instructions(windowPtr,'PreCleanEEG2')
+Beeper(50, 1, 1);
 clean_eeg(windowPtr,180)
 display_instructions(windowPtr,'Final')
+save('data_final')
+%}
 Screen('CloseAll')

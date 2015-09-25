@@ -8,7 +8,7 @@ if (strcmp(instruction_screen,'PreS1Localization'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
 elseif (strcmp(instruction_screen,'PreTrainingBlock1A'))
     
@@ -18,7 +18,7 @@ elseif (strcmp(instruction_screen,'PreTrainingBlock1A'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
 elseif (strcmp(instruction_screen,'PreTrainingBlock1B'))
     
@@ -28,7 +28,7 @@ elseif (strcmp(instruction_screen,'PreTrainingBlock1B'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
 elseif (strcmp(instruction_screen,'PreTrainingBlock2'))
     
@@ -38,7 +38,7 @@ elseif (strcmp(instruction_screen,'PreTrainingBlock2'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
 elseif (strcmp(instruction_screen,'PreCleanEEG1'))
     
@@ -48,7 +48,7 @@ elseif (strcmp(instruction_screen,'PreCleanEEG1'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
 elseif (strcmp(instruction_screen,'PreTask'))
     
@@ -58,7 +58,7 @@ elseif (strcmp(instruction_screen,'PreTask'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
 elseif (strcmp(instruction_screen,'PreCleanEEG2'))
     
@@ -68,7 +68,7 @@ elseif (strcmp(instruction_screen,'PreCleanEEG2'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
     
 elseif (strcmp(instruction_screen,'Final'))
@@ -79,7 +79,7 @@ elseif (strcmp(instruction_screen,'Final'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+600);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+120);
     
 elseif (strcmp(instruction_screen,'Break'))
     
@@ -89,7 +89,7 @@ elseif (strcmp(instruction_screen,'Break'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+50);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+50);
     
     instructions = imread('Instructions_BreakB.png');
     instructions_screen = Screen('MakeTexture',windowPtr,instructions);
@@ -97,7 +97,7 @@ elseif (strcmp(instruction_screen,'Break'))
     Screen('DrawTexture',windowPtr,instructions_screen);
     Screen(windowPtr,'Flip');
     
-    [wait_1, wait_2, wait_3] = KbWait([], 2, GetSecs()+10);
+    [wait_1, wait_2, wait_3] = KbWait(-3, 2, GetSecs()+10);
     
     
 end

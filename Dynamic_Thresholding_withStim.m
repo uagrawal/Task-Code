@@ -31,6 +31,8 @@ green_cross_screen = Screen('MakeTexture',windowPtr,green_cross);
 red_cross_screen = Screen('MakeTexture',windowPtr,red_cross);
 solid_black_screen = Screen('MakeTexture',windowPtr,solid_black);
 
+tACS_on = 0;
+
 
 % draw initial black screen
 Screen('DrawTexture',windowPtr,solid_black_screen);
@@ -73,6 +75,22 @@ for (i = 1:total_num_trials)
     % 8) Checks to see if the threshold needs to be changed and does so
     % 9) Outputs array of data
     
+    %% Stimulation
+    
+    % Stimulate every 2 trials
+    if (mod(i+2,4) == 0)
+        
+        writeDigitalPin(a, 11, 1)
+        tACS_on = 1;
+        fprintf('Zap Zap')
+        
+    elseif (mod(i,4) == 0)
+  
+        writeDigitalPin(a, 11, 0)
+        tACS_on = 0;
+        fprintf('No Zap')
+        
+    end
     
     %% Delivery of stimulus
     %Choose random stimulus
@@ -145,8 +163,8 @@ for (i = 1:total_num_trials)
                 end
             end
             
-        % If it wasn't detected, and previous two threshold stimuli weren't
-        % detected, then increase threshold
+            % If it wasn't detected, and previous two threshold stimuli weren't
+            % detected, then increase threshold
         else
             
             if (count_threshold > 2)
@@ -158,24 +176,12 @@ for (i = 1:total_num_trials)
                     count_threshold = 0;
                     
                 end
-            end  
-        end  
+            end
+        end
     end
     
-    %% Stimulation
+    %%
     
-    % Stimulate every 2 trials
-    if (mod(i+2,4) == 0)
-        
-        writeDigitalPin(a, 11, 1)
-        
-    elseif (mod(i,4) == 0)
-        
-        writeDigitalPin(a, 11, 0)
-    
-    end
-    
-
     %Check for quitting (= is to quit)
     if (keyCode(46) == 1)
         
@@ -189,11 +195,13 @@ for (i = 1:total_num_trials)
     end
     
     %Output data appropriately
-    data = [i, time, delay_time, stimulus, keyCode(30)];
+    data = [i, time, delay_time, stimulus, keyCode(30), tACS_on];
     
     output_array = cat(1,output_array,data);
     
     %Output data
     output_array(end,:)
     
+end
+
 end

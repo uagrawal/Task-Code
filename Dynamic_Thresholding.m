@@ -144,8 +144,8 @@ for (i = 1:total_num_trials)
                 end
             end
             
-        % If it wasn't detected, and previous two threshold stimuli weren't
-        % detected, then increase threshold
+            % If it wasn't detected, and previous two threshold stimuli weren't
+            % detected, then increase threshold
         else
             
             if (count_threshold > 2)
@@ -157,11 +157,11 @@ for (i = 1:total_num_trials)
                     count_threshold = 0;
                     
                 end
-            end  
-        end  
+            end
+        end
     end
     
-
+    
     %Check for quitting (= is to quit)
     if (keyCode(46) == 1)
         
@@ -181,4 +181,6 @@ for (i = 1:total_num_trials)
     %Output data
     output_array(end,:)
     
+end
+
 end
