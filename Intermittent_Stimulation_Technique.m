@@ -19,6 +19,7 @@
 
 % Initialize screens (to determine if using one laptop or connected
 % monitor)
+Screen('Preference', 'SkipSyncTests', 1);
 setGlobalVariables();
 global screens
 
@@ -45,6 +46,7 @@ Screen('Preference','SyncTestSettings',[.005],[50],[.5],[5]);
 %% 1) S1 Localization - 7 min
 % This will involve 100 max intensity stimulations to the fingertip in 50 seconds to help
 % feed into the starstim software and localize S1
+
 
 display_instructions(windowPtr,'PreS1Localization')
 subject_quit_S1_Localization = S1_Localization(windowPtr);
@@ -101,12 +103,10 @@ end
 % 3 minute period where instruction screen is displayed and clean EEG is
 % recorded
 display_instructions(windowPtr,'PreCleanEEG1')
-Beeper(50, 1, 1);
 clean_eeg(windowPtr,180)
 
 
 %% 4) Go into PEST Convergence Procedure
-Beeper(50, 1, 1);
 display_instructions(windowPtr,'PreTask')
 % A procedure to obtain the tactile detection threshold (50 %)
 [detection_threshold, output_array_PEST_1, subject_quit_PEST] = PEST_Convergence_Procedure(windowPtr);
@@ -121,15 +121,15 @@ while (detection_threshold == 1)
     
 end
 %% 5) Baseline EEG/Tactile 1 - 7.5 min
-Beeper(50, 1, 1);
-[tactile_detection_baseline_pretACS, subject_quit_task, new_threshold_pretACS] = Dynamic_Thresholding(windowPtr,detection_threshold,150);
+[tactile_detection_baseline_pretACS, subject_quit_task, new_threshold_pretACS] = Dynamic_Thresholding(windowPtr,detection_threshold,200);
 
 save('baseline_data')
+
+%5A) - CALCULATE IAF AND PROGRAM IN tACS!!!
 
 %% 6) tACS/Tactile/EEG - 15 min
 
 display_instructions(windowPtr,'Break')
-Beeper(50, 1, 1);
 [tactile_detection_tACS, subject_quit_task, new_threshold_tACS] = Dynamic_Thresholding_withStim(windowPtr, new_threshold_pretACS,300,a);
 clear a
 save('post_tACS_data')
@@ -137,8 +137,7 @@ save('post_tACS_data')
 %% 7) Baseline EEG/Tactile 2 - 7.5 min
 
 display_instructions(windowPtr,'Break')
-Beeper(50, 1, 1);
-[tactile_detection_baseline_posttACS, subject_quit_task, new_threshold_posttACS] = Dynamic_Thresholding(windowPtr,new_threshold_tACS,150);
+[tactile_detection_baseline_posttACS, subject_quit_task, new_threshold_posttACS] = Dynamic_Thresholding(windowPtr,new_threshold_tACS,200);
 
 
 %% 13) Clean EEG 2
@@ -146,9 +145,8 @@ Beeper(50, 1, 1);
 % 3 minute period where instruction screen is displayed and clean EEG is
 % recorded
 display_instructions(windowPtr,'PreCleanEEG2')
-Beeper(50, 1, 1);
 clean_eeg(windowPtr,180)
 display_instructions(windowPtr,'Final')
 save('data_final')
-%}
+
 Screen('CloseAll')

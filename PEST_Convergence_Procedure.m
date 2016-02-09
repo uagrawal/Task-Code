@@ -48,7 +48,7 @@ mid = max/2;
 min = 0;
 
 %Initialize variable to detect 5 um difference
-delta_threshold = .02; % the equivalent of 5 um
+delta_threshold = .01; % the equivalent of 5 um
 
 %Initialize boolean for while loop
 threshold_not_reached = true;
